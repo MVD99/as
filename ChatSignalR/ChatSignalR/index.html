@@ -1,10 +1,74 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <link href="https://getbootstrap.com/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <meta charset="utf-8" />
     <title></title>
     <script src="Scripts/jquery-1.6.4.min.js"></script>
     <script src="Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+            .nav-scroller .nav {
+                display: flex;
+                flex-wrap: nowrap;
+                padding-bottom: 1rem;
+                margin-top: -1px;
+                overflow-x: auto;
+                text-align: center;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+        .text1 {
+            color: black;
+        }
+
+        .button {
+            margin-top: 10px;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+    </style>
+
     <script>
         $(function () {
             var info = $("#info");
@@ -18,13 +82,34 @@
                 $("#enviar").attr("disabled", true);
             });
             $("#enviar").click(function () {
-                cnn.send($("#msg").val());
+                if ($("#chatroom").attr("disabled") == false)
+                    cnn.send($("#msg").val());
+                else
+                    cnn.send($("#chatroom").val() + ":" + $("#msg").val())
             });
+            $("#entrar").click(function () {
+                //entrar no chat de uma formação
+                cnn.send("adicionar " + $("#chatroom").val());
+
+                $("#chatroom").attr("disabled", true);
+                $("#entrar").attr("disabled", true);
+                $("#sair").attr("disabled", false);
+            })
+            $("#sair").click(function () {
+                //sair do chat de uma formação
+                cnn.send("remove " + $("#chatroom").text());
+
+                $("#chatroom").attr("disabled", false);
+                $("#entrar").attr("disabled", false);
+                $("#sair").attr("disabled", true);
+            })
+            //iniciar a sessão
             cnn.start()
                 .done(function () {
                     info.append("<p>Ligação estabelecida.</p>");
                     $("#desligar").attr("disabled", false);
                     $("#enviar").attr("disabled", false);
+                    $("#sair").attr("disabled", false);
                 })
                 .fail(function () {
                     info.append("<p>Ocorreu um erro ao estabelecer a ligação</p>");
@@ -33,10 +118,41 @@
     </script>
 </head>
 <body>
-    <h1>Cliente de SignalR</h1>
-    <div id="info"></div>
-    <textarea id="msg"></textarea>
-    <button id="enviar" disabled="disabled">Enviar</button>
-    <button id="desligar" disabled="disabled">Desligar</button>
+    <header>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container">
+                <a href="#" class="navbar-brand d-flex align-items-center">
+                    <strong class="text2">FormsUa</strong>
+                </a>
+                <form class="d-flex" role="search">
+                    <button class="btn btn-danger button" type="submit">Sign up / Log In</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <h1> Chatroom</h1>
+        <div id="info"> </div>
+        <select class="form-control" id="chatroom">
+            <option value="F1"> Formação 1</option>
+            <option value="F2"> Formação 2</option>
+        </select>
+        <textarea class="form-control" id="msg"> </textarea>
+        <button class="btn btn-success" id="entrar"> Entrar na formação</button>
+        <button class="btn btn-danger" id="sair"> Sair da formação</button>
+        <button class="btn btn-info" id="enviar" disabled="disabled"> Enviar</button>
+        <button class="btn btn-danger" id="desligar" disabled="disabled"> Desligar</button>
+        <footer class="text-muted py-5">
+            <div class="container">
+                <p class="float-end mb-1">
+                    <a href="#">Back to top</a>
+                </p>
+                <p class="mb-1 text1">About</p>
+                <p class="mb-0">Plataforma criada por Diogo Mendes, Guilherme Craveiro, Henrique Cruz, Ruben Lopes</p>
+            </div>
+        </footer>
+        <script src="https://getbootstrap.com/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    </div>
 </body>
+
 </html>
