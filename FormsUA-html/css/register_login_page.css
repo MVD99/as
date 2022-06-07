@@ -162,6 +162,7 @@ body {
     width: 400px;
     max-width: 400px;
     margin: 1rem;
+    margin-top: 50px;
     padding: 2rem;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
     border-radius: var(--border-radius);
@@ -259,7 +260,7 @@ body {
 
 .form__text {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .form__link {
