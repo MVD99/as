@@ -30,11 +30,38 @@ namespace ChatSignalR
             return Connection.Broadcast(string.Format("{0} desconectou-se do serviço eco.", connectionId));
         }
 
-        protected override async Task OnReceived(IRequest request, string connectionId, string data)
+        protected override Task OnReceived(IRequest request, string connectionId, string data)
         {
-            //reenvia a mensagem para todos os clientes menos para o que enviou
-            await Connection.Broadcast(connectionId+":"+data,connectionId);
-            await base.OnReceived(request, connectionId, data);
+            //verifica se é um comando para adicionar ou remover
+            var temp = data.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            //adicionar ao grupo
+            if (temp.Length == 2 && temp[0].ToLower() == "adicionar")
+            {
+                Connection.Broadcast(connectionId + " adicionado ao chatroom de " + temp[1], connectionId);
+                return this.Groups.Add(connectionId, temp[1]);
+            }
+            //remover do grupo
+            if (temp.Length == 2 && temp[0].ToLower() == "remove")
+            {
+                Connection.Broadcast(connectionId + " removido do chatroom de " + temp[1], connectionId);
+                return this.Groups.Remove(connectionId, temp[1]);
+            }
+            //mensagem de um grupo
+            int i;
+            i = data.IndexOf(":");
+            if (i > -1)
+            {
+                //reenvia a mensagem para o grupo
+                var groupName = data.Substring(0, i);
+                var mensagem = data.Substring(i + 1);
+                this.Groups.Send(groupName,connectionId+" - " +mensagem);
+            }
+            else
+            { 
+                //reenvia a mensagem para todos os clientes menos para o que enviou
+                Connection.Broadcast(connectionId + " - " + data, connectionId);
+            }
+            return base.OnReceived(request, connectionId, data);
         }
     }
 }
