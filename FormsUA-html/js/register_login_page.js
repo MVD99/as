@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setFormMessage(loginForm, "error", "There are empty fields");
         }
         if(existantLoginUsernamePassword()){
-            window.location.href = "http://stackoverflow.com";
+            window.location.href = "../html/formando.html";
         }
     });
 
