@@ -2,8 +2,8 @@
 
 var dataBase = [];
 
-function addDict(username, password, email){
-    var dict = {username: username, password: password, email: email};
+function addDict(username, password, email, formador){
+    var dict = {username: username, password: password, email: email, formador: formador};
     dataBase.push(dict);
 }
 
@@ -25,11 +25,23 @@ function checkKey(key, value){
     if(key == "email"){
         return (dataBase.some(e => e.email == value)); 
     }
+    if(key == "formador"){
+        return (dataBase.some(e => e.formador == value)); 
+    }
 }
 
 function checkKeyValue(username, password){
     for(let i = 0; i < dataBase.length; i++){
         if(dataBase[i]['username'] === username && dataBase[i]['password'] === password){
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkKeyValueCheckbox(username, password){
+    for(let i = 0; i < dataBase.length; i++){
+        if(dataBase[i]['username'] === username && dataBase[i]['password'] === password && dataBase[i]['formador'] === true){
             return true;
         }
     }
@@ -148,6 +160,10 @@ function emptyLoginFields(){
     return false;
 }
 
+function checkBoxFormador(){
+    return (checkKeyValueCheckbox(document.getElementById('loginUsername').value, document.getElementById('loginPassword').value));
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.querySelector("#login");
@@ -175,8 +191,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if(emptyLoginFields()){
             setFormMessage(loginForm, "error", "There are empty fields");
         }
-        if(existantLoginUsernamePassword()){
-            window.location.href = "..formando";
+        if(existantLoginUsernamePassword() && checkBoxFormador()){
+            window.location.href = "../html/formandores.html";
+        }
+        if(existantLoginUsernamePassword() && !checkBoxFormador()){
+            window.location.href = "../html/formando.html";
         }
     });
 
@@ -191,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setFormMessage(createAccountForm, "error", "There are empty fields");
         }
         if(validateAllFields() && !emptyFields() && !existantUsername() && !existantEmail()){
-            addDict(document.getElementById('signupUsername').value, document.getElementById('password').value, document.getElementById('email').value);
+            addDict(document.getElementById('signupUsername').value, document.getElementById('password').value, document.getElementById('email').value, document.getElementById('checkboxID').checked);
             var delayInMilliseconds = 1500; //1 second
             setTimeout(function() {
                 loginForm.classList.remove("form--hidden");

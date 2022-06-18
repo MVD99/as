@@ -154,7 +154,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    background: url(../static/imagens/background.jpg);
+    background: url(../imagens/background.jpg);
     background-size: cover;
 }
 
@@ -273,5 +273,47 @@ body {
     text-decoration: underline;
 }
 
+.checkbox {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
 
+.checkbox__input{
+    display: none;
+}
+
+.checkbox__box{
+    width: 1.25em;
+    height: 1.25em;
+    border: 2px solid #cccccc;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.checkbox__box::after{
+    content: '\2714';
+    color: #ffffff;
+    transform: scale(0);
+    transition: transform 0.15s;
+}
+
+.checkbox__input:checked + .checkbox__box{
+    background: #2266dc;
+    border-color: #2266dc;
+}
+
+.checkbox__input:checked + .checkbox__box::after {
+    transform:scale(1);
+}
+
+
+.form__input__checkbox-group{
+    padding: 0.4em;
+}
 
