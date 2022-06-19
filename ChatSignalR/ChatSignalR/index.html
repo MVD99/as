@@ -1,12 +1,135 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <link href="https://getbootstrap.com/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <meta charset="utf-8" />
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
+    <link href="https://getbootstrap.com/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <meta name="theme-color" content="#712cf9">
     <title></title>
     <script src="Scripts/jquery-1.6.4.min.js"></script>
     <script src="Scripts/jquery.signalR-2.4.3.min.js"></script>
     <style>
+        /*body {
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+        */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Button used to open the chat form - fixed at the bottom of the page */
+        .open-button {
+            background-color: #555;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+            width: 180px;
+        }
+
+        /* The popup chat - hidden by default */
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+
+        /* Add styles to the form container */
+        .form-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        /* Full-width textarea */
+        #myForm textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+            resize: none;
+            min-height: 200px;
+        }
+
+            /* When the textarea gets focus, do something */
+            #myForm textarea:focus {
+                background-color: #ddd;
+                outline: none;
+            }
+
+        /* Set a style for the submit/send button */
+        #myForm .botao {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        #myForm .entrar {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        /* Add a red background color to the cancel button */
+        #myForm .cancel {
+            background-color: red;
+        }
+
+        #myForm .desligar {
+            background-color: blue;
+        }
+
+        #myForm .entrarFormacao {
+            background-color: yellow;
+            width: 30%;
+            float: left;
+            color: black;
+        }
+
+        #myForm .sairFormacao {
+            background-color: orange;
+            width: 30%;
+            color: black;
+        }
+
+        #myForm .selectFormacao {
+            background-color: lightyellow;
+            color: black;
+            width: 30%;
+            float: left;
+        }
+        #myForm{
+            background-color: white;
+            opacity:0.9;
+        }
+
+        /* Add some hover effects to buttons */
+        #myForm .btn:hover, .open-button:hover {
+            opacity: 1;
+        }
+    </style>
+    <style>
+        .navbar {
+            --bs-navbar-padding-y: 0.5rem;
+        }
+
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -67,9 +190,38 @@
             margin-right: 10px;
             margin-left: 10px;
         }
-    </style>
 
+        .container {
+            padding: 0px;
+        }
+
+        .text2 {
+            margin-bottom: 5px;
+        }
+
+        .text3 {
+            color: white;
+            background: rgba(43, 42, 42, 0.5);
+            width: fit-content;
+        }
+
+        .text4 {
+            color: white;
+            background: rgba(43, 42, 42, 0.5);
+            width: fit-content;
+            text-align: auto;
+        }
+    </style>
     <script>
+        function openPopoutChat() {
+            document.getElementById("myForm").style.display = "block";
+            document.getElementById("btOpen").style.display = "none";
+        }
+
+        function closePopoutChat() {
+            document.getElementById("myForm").style.display = "none";
+            document.getElementById("btOpen").style.display = "block";
+        }
         $(function () {
             var info = $("#info");
             var cnn = $.connection("chat");
@@ -86,6 +238,7 @@
                     cnn.send($("#msg").val());
                 else
                     cnn.send($("#chatroom").val() + ":" + $("#msg").val())
+                $("#msg").val("");
             });
             $("#entrar").click(function () {
                 //entrar no chat de uma formação
@@ -118,46 +271,256 @@
     </script>
 </head>
 <body>
+
     <header>
-        <div class="navbar navbar-dark bg-dark shadow-sm">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a href="#" class="navbar-brand d-flex align-items-center">
-                    <strong class="text2">FormsUa</strong>
+                    <strong class="text2" style="font-size:30px">FormsUa</strong>
                 </a>
+
+                <div class="justify-content-end" id="myNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <form action="formando.html">
+                                <button class="btn btn-danger button" type="submit">Minhas formações</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="conta.html">
+                                <button class="btn btn-danger button" type="submit">Minha conta</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="index.html">
+                                <button class="btn btn-danger button" type="submit">Log Out</button>
+                            </form>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../imagens/back1.jpg" width="100%" height="330px">
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h1 class="text3">Liderança de Equipa</h1>
+                            <p class="text3">Aprenda a ser um melhor lider.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="../imagens/back2.jpg" width="100%" height="330px">
+                    <div class="container">
+                        <div class="carousel-caption text-end">
+                            <h1 class="text1">Formador: </h1>
+                            <p class="text1">Diogo Mendes </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Informações Gerais</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Sessões</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Avaliação</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <pre>
+
+                <b>Objetivos: </b>
+                <b>Gerais:</b>
+            Dotar os formandos de conhecimentos sobre o conceito de Liderança, compreendendo a Liderança Situacional e que tem aos seu dispor diversos estilos de liderança,
+            bem como as competências críticas de um Líder de sucesso e como pode potenciar a performance da sua equipa.
+          
+                <b>Específicos:</b>
+            Concluída a ação de formação, os e-alunos deverão ser capazes de:
+            - Compreender o conceito de Liderança e aplicação em contextos diversos;
+            - Identificar diferentes estilos de Liderança;
+            - Deter conhecimentos e ferramentas práticas para desenvolver as competências comportamentais do líder;
+            - Conhecer estratégias e metodologias eficazes para alcançar ainda melhores resultados na sua equipa;
+            - Definir o plano de ação para aumentar o seu sucesso profissional.
+
+
+                <b>Programa</b>
+                <b>1. Caracterizar a Liderança e o seu contexto</b>
+              1.1 Conceito de Liderança
+              1.2 Liderança Situacional
+              1.3 Estilos de Liderança
+
+                <b>2. Competências críticas de Liderança</b>
+              2.1 Roda da Vida aplicada à Liderança
+              2.2 Competências críticas de Liderança
+
+                <b>3. Desenvolvimento de Pessoas</b>
+              3.1 O conceito de Motivação
+              3.2 Estratégias para aumentar o sucesso da equipa
+
+                <b>4. O meu plano de Ação</b>
+              4.1 Definição de metas
+              4.2 Plano de ação para um líder de sucesso
+        </pre>
+            </div>
+            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <div id="accordion">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
+                                Sessão #1
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                            <div class="card-body">
+                                <pre>
+                                <b>Data: </b>dd/mm/aa
+
+                                <b>Conteúdos: </b>
+                                        Conceito de Liderança
+                
+                                <b>Tarefa:</b>
+                                      - Breve descrição dos diferentes tipos de liderança.
+                                <b>Submissão:</b>
+                                <input type="file" title="Arraste para aqui" />
+                              </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
+                                Sessão #2
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                            <div class="card-body">
+                                <pre>
+                                <b>Data: </b>dd/mm/aa
+
+                                <b>Conteúdos: </b>
+                  Liderança Situacional
+                  Estilos de Liderança
+
+                                <b>Tarefa:</b>
+                  - Nenhuma.
+              </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">
+                                Sessão #3
+                            </a>
+                        </div>
+                        <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+                            <div class="card-body">
+                                <pre>
+                                <b>Data: </b>dd/mm/aa
+
+                                <b>Conteúdos: </b>
+                  Roda da Vida aplicada à Liderança
+                  Competências críticas de Liderança
+                  
+                                <b>Tarefa:</b>
+                  - Nenhuma.
+              </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseFour">
+                                Sessão #4
+                            </a>
+                        </div>
+                        <div id="collapseFour" class="collapse" data-bs-parent="#accordion">
+                            <div class="card-body">
+                                <pre>
+                                <b>Data: </b>dd/mm/aa
+
+                                <b>Conteúdos: </b>
+                                        O conceito de Motivação
+                  
+                                <b>Tarefa:</b>
+                                        - Breve apresentação sobre o conceito de motivação.
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                <pre>
+                <b>Avaliação</b>
+          No modelo de e-learning o e-aluno tem a possibilidade de frequentar a formação e realizar as atividades nos dias e horários que desejar, 
+          desde que dentro dos prazos definidos para a formação.
+          A avaliação final depende da avaliação obtida nos testes.
+
+          A conclusão da formação com aproveitamento implica a obtenção de uma classificação final igual ou superior a 10 (dez) valores na nota de avaliação final,
+          numa escala de 0 a 20 valores. 
+          A conclusão da formação com aproveitamento resulta na obtenção de um Certificado de Formação Profissional, 
+          emitido de acordo com os requisitos legais em vigor, que será disponibilizado na área do e-aluno no site da FormsUA até um prazo máximo de 15 dias após a conclusão da ação de formação.
+      </pre>
             </div>
         </div>
-    </header>
-    <div class="container">
-        <h1> Chatroom</h1>
-        <div class="chat-popup" id="info"> </div>
-        <select class="form-control" id="chatroom">
-            <option value="F1"> Formação 1</option>
-            <option value="F2"> Formação 2</option>
-        </select>
-        <textarea class="form-control" id="msg"> </textarea>
-        <button class="btn btn-success" id="entrar"> Entrar na formação</button>
-        <button class="btn btn-danger" id="sair"> Sair da formação</button>
-        <button class="btn btn-info" id="enviar" disabled="disabled"> Enviar</button>
-        <button class="btn btn-danger" id="desligar" disabled="disabled"> Desligar</button>
-        <footer class="text-muted py-5">
-            <div class="container">
-                <p class="float-end mb-1">
-                    <a href="#">Back to top</a>
-                </p>
-                <p class="mb-1 text1">About</p>
-                <p class="mb-0">Plataforma criada por Diogo Mendes, Guilherme Craveiro, Henrique Cruz, Ruben Lopes</p>
-            </div>
-        </footer>
-        <script src="https://getbootstrap.com/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-        <script>
-            function openForm() {
-                document.getElementById("myForm").style.display = "block";
-            }
-            function closeForm() {
-                document.getElementById("myForm").style.display = "none";
-            }
-        </script>
+    </main>
+
+    <footer class="text-muted py-4">
+        <div class="container">
+            <p class="float-end mb-1">
+                <a href="#">Back to top</a>
+            </p>
+            <p class="mb-1 text1">About</p>
+            <p class="mb-0">Plataforma criada por Diogo Mendes, Guilherme Craveiro, Henrique Cruz, Ruben Lopes</p>
+        </div>
+    </footer>
+    <script src="https://getbootstrap.com/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    <button class="open-button" id="btOpen" onclick="openPopoutChat()">Open Chat</button>
+
+    <div class="chat-popup" id="myForm">
+        <h1>Cliente de SignalR</h1>
+        <div id="info" style="display: block;"></div>
+        <div>
+            <select id="chatroom" class="botao selectFormacao">
+                <option value="F1">Formação 1</option>
+                <option value="F2">Formação 2</option>
+            </select>
+            <button id="entrar" class="botao entrarFormacao">Entrar na formação</button>
+            <button id="sair" class="botao sairFormacao">Sair da formação</button>
+        </div>
+        <textarea id="msg" placeholder="Escreva a sua mensagem"></textarea>
+        <button id="enviar" class="botao" disabled="disabled">Enviar</button>
+        <button id="desligar" class="botao desligar" disabled="disabled">Desligar</button>
+        <button type="button" class="botao cancel" onclick="closePopoutChat()">Close Chat</button>
     </div>
 </body>
-
 </html>
