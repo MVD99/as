@@ -50,7 +50,7 @@
 /*Position and Width*/
 
 .NavBar .Home{
-    width: 180px;
+    width: fit-content;
     left: 10px;
 }
 
@@ -130,12 +130,7 @@
 }
 
 
-/*Animations*/
 
-.NavBar .Home:hover, .Register:hover, .Login:hover
-{
-background: rgba(255,255,255,.2);
-}
 
 
         /*Login and Register*/
@@ -316,4 +311,5 @@ body {
 .form__input__checkbox-group{
     padding: 0.4em;
 }
+
 
