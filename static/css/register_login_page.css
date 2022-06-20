@@ -50,7 +50,7 @@
 /*Position and Width*/
 
 .NavBar .Home{
-    width: 180px;
+    width: fit-content;
     left: 10px;
 }
 
@@ -119,8 +119,9 @@
 /*Font-Size and top position*/
 
 .NavBar .Home p{
-    font-size: 36px;
-    margin-top: 6px;
+    font-size: 24px;
+    font-family: 'Montserrat', sans-serif;;
+    margin-top: 15px;
 }
 
 .NavBar .Register p, .Login p
@@ -130,12 +131,6 @@
 }
 
 
-/*Animations*/
-
-.NavBar .Home:hover, .Register:hover, .Login:hover
-{
-background: rgba(255,255,255,.2);
-}
 
 
         /*Login and Register*/
@@ -316,4 +311,5 @@ body {
 .form__input__checkbox-group{
     padding: 0.4em;
 }
+
 
