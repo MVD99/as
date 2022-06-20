@@ -5,18 +5,21 @@ server.py
 Stripe Sample.
 Python 3.6 or newer required.
 """
-from crypt import methods
+
+from cgitb import lookup
 import os
 import json
+from unittest import result
 from flask import Flask, jsonify, redirect, render_template, request
 
 import stripe
 # This is your test secret API key.
 stripe.api_key = 'sk_test_51L87ajJvldSQ1u1OL0Vh3Ypv3L3cvnsQfQ0wd45OQeWHe0OxeVFQ1yF6BLn8uJg20Zy1vArHWHM2unLJsACXHlkB0011PpnrW5'
 
-app = Flask(__name__,template_folder='html', static_url_path='',static_folder='static')
+app = Flask(__name__,template_folder='html', static_url_path='', static_folder='static')
 
 YOUR_DOMAIN = 'http://localhost:4242'
+
 
 @app.route('/')
 def index():
@@ -45,51 +48,42 @@ def payments():
 @app.route('/conta')
 def conta():
     return render_template('conta.html')
-'''
-def calculate_order_amount(items):
-    # Replace this constant with a calculation of the order's amount
-    # Calculate the order total on the server to prevent
-    # people from directly manipulating the amount on the client
-    return 1400
 
-@app.route('/create-payment-intent', methods=['POST'])
-def create_payment():
-    try:
-        data = json.loads(request.data)
-        # Create a PaymentIntent with the order amount and currency
-        intent = stripe.PaymentIntent.create(
-            amount=calculate_order_amount(data['items']),
-            currency='eur',
-            automatic_payment_methods={
-                'enabled': True,
-            },
-        )
-        return jsonify({
-            'clientSecret': intent['client_secret']
-        })
-    except Exception as e:
-        return jsonify(error=str(e)), 403
-'''
+@app.route('/plans')
+def plans():
+
+    return render_template('payments.html')
+
+
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
     try:
+        print("Trying prices")
+        prices = stripe.Price.list(
+            product=request.form.get('product'),
+            active='true'
+            )
+        for i in range(2):
+            if prices.data[i].recurring.interval == request.form.get('nickname'):
+                final = prices.data[i]
+            else:
+                final = prices.data[0]
         checkout_session = stripe.checkout.Session.create(
             line_items=[
                 {
-                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    'price': 'price_1L89FzJvldSQ1u1OczftrxrX',
+                    'price': final.id,
                     'quantity': 1,
                 },
             ],
             mode='subscription',
-            success_url= YOUR_DOMAIN + '/success.html',
-            cancel_url= YOUR_DOMAIN + '/cancel.html',
+            success_url=YOUR_DOMAIN +
+            '/success.html?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url=YOUR_DOMAIN + '/cancel.html',
         )
-    except Exception as e:
+    except Exception as e :
         return str(e)
 
     return redirect(checkout_session.url, code=303)
-
 
 if __name__ == '__main__':
     app.run(port=4242)
