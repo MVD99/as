@@ -90,6 +90,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="imagens\accounting.jpg" />
+    <Content Include="imagens\back1.jpg" />
+    <Content Include="imagens\back2.jpg" />
+    <Content Include="imagens\background.jpg" />
+    <Content Include="imagens\conflict.jpg" />
+    <Content Include="imagens\fight.jpg" />
+    <Content Include="imagens\firstaid.jpg" />
+    <Content Include="imagens\garden.jpg" />
+    <Content Include="imagens\german.jpg" />
+    <Content Include="imagens\german2.jpg" />
+    <Content Include="imagens\https___s3-images.ladbible.com_s3_content_11f3a0f060c795f390e3b62b186f1265.jpg" />
+    <Content Include="imagens\img1.jpg" />
+    <Content Include="imagens\img2.jpg" />
+    <Content Include="imagens\leader.jpg" />
+    <Content Include="imagens\main.jpg" />
+    <Content Include="imagens\main2.jpg" />
+    <Content Include="imagens\marketing.jpg" />
+    <Content Include="imagens\new.jpg" />
+    <Content Include="imagens\publicity.jpg" />
+    <Content Include="imagens\teacher.jpg" />
+    <Content Include="imagens\teacher2.jpg" />
     <Content Include="index.html" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
