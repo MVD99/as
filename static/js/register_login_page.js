@@ -192,10 +192,10 @@ document.addEventListener("DOMContentLoaded", () => {
             setFormMessage(loginForm, "error", "There are empty fields");
         }
         if(existantLoginUsernamePassword() && checkBoxFormador()){
-            window.location.href = "../html/formandores.html";
+            window.location.href = "formadores.html";
         }
         if(existantLoginUsernamePassword() && !checkBoxFormador()){
-            window.location.href = "../html/formando.html";
+            window.location.href = "formando.html";
         }
     });
 

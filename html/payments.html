@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/pricing-plan.css">
+  <link rel="stylesheet" href="../static/css/pricing-plan.css">
 <style>
   .bd-placeholder-img {
     font-size: 1.125rem;
@@ -93,7 +93,7 @@
 <header>
 <div class="navbar navbar-dark bg-dark shadow-sm">
 <div class="container">
-  <a href="index" class="navbar-brand d-flex align-items-center">
+  <a href="index.html" class="navbar-brand d-flex align-items-center">
     <strong class="text2">FormsUA</strong>
   </a>
 </div>
@@ -128,7 +128,7 @@
                   <ul class="pricing-plan-features">
                     <li>Monitorização de progresso</li>
                   </ul>
-                  <form action="/create-checkout-session" method="POST">
+                  <form action="/create-checkout-session-onetime" method="POST">
                     <input type="hidden" name="product" value='prod_Lpo71JXZYDVvbF' />
                     <input type="hidden" name="nickname" value='payment' />
                     <button class="btn pricing-plan-purchase-btn" name = button id="checkout-and-portal-button" type="submit">Checkout</button>
@@ -189,7 +189,7 @@
                   <ul class="pricing-plan-features">
                     <li>Monitorização de progresso</li>
                   </ul>
-                  <form action="/create-checkout-session" method="POST">
+                  <form action="/create-checkout-session-onetime" method="POST">
                     <input type="hidden" name="product" value='prod_Lpo71JXZYDVvbF' />
                     <input type="hidden" name="nickname" value='payment' />
                     <button class="btn pricing-plan-purchase-btn" id="checkout-and-portal-button" type="submit">Checkout</button>
