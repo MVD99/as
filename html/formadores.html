@@ -11,6 +11,9 @@
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
       .nav-item{
         padding:10px;
@@ -47,12 +50,12 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <form action="">
-            <button class="btn btn-danger button" type="submit">Nova formação</button>
+            <button class="btn btn-danger button" type="button" data-toggle="modal" data-target="#formacaoModal">Nova formação</button>
           </form>
                 </li>
                 <li class="nav-item">
                     <form action="">
-            <button class="btn btn-danger button" type="submit">Adicionar atividade</button>
+            <button class="btn btn-danger button" type="button" data-toggle="modal" data-target="#atividadeModal">Adicionar atividade</button>
           </form>
                 </li>
                 <li class="nav-item">
@@ -77,6 +80,65 @@
     </header>
 
 <main role="main">
+  <div class="modal fade" id="formacaoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nova Formação</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Nome da formação
+          <input type="text" class="form-control">
+          Breve descrição
+          <input type="text" class="form-control">
+          Avaliação
+          <input type="text" class="form-control">
+          Duração
+          <input type="text" class="form-control">
+          Custo
+          <input type="text" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary">Criar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main role="main">
+    <div class="modal fade" id="atividadeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nova Atividade</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Formação
+            <select class="form-control"> 
+              <option value="1"> Liderança de Equipa </option> 
+              <option value="2"> Publicidade </option> 
+              <option value="3"> Primeiros Socorros </option> 
+              <option value="4"> Alemão - I </option> 
+            </select>
+            Nome da Atividade
+            <input type="text" class="form-control">
+            Descrição
+            <input type="text" class="form-control">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary">Criar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <section class="jumbotron text-center">
     <div class="container">
@@ -101,7 +163,6 @@
                   </form>
                   <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>                
                 </div>
-                <small class="text-muted">Formador: Diogo Mendes</small>
               </div>
             </div>
           </div>
@@ -118,7 +179,38 @@
                 </form>
                 <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button> 
                 </div>
-                <small class="text-muted">Formador: Henrique Cruz</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" src = "../static/imagens/conflict.jpg" width = "427px" height = "225px">            
+            <div class="card-body">
+              <p class="card-text">Primeiros Socorros</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                <form action="form1.html">
+                  <input type="submit" class="btn btn-sm btn-outline-secondary" value="Aceder"/>                  
+                </form> 
+                <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" src = "../static/imagens/german.jpg" width = "427px" height = "225px">
+            <div class="card-body">
+              <p class="card-text">Alemão - I</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <form action="form1.html">
+                    <input type="submit" class="btn btn-sm btn-outline-secondary" value="Aceder"/>                  
+                  </form> 
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button> 
+                </div>
               </div>
             </div>
           </div>
