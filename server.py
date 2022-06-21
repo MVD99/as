@@ -22,6 +22,10 @@ YOUR_DOMAIN = 'http://localhost:4242'
 def index():
     return render_template('index.html')
 
+@app.route('/index.html')
+def   index2():
+    return render_template('index.html')
+    
 @app.route('/register_login_page.html')
 def register():
     return render_template('register_login_page.html')
@@ -83,7 +87,7 @@ def create_checkout_session():
     return redirect(checkout_session.url, code=303)
 
 '''@app.route('/create-portal-session', methods=['POST'])
-def customer_portal():
+def customer_portal():  
     # For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
     # Typically this is stored alongside the authenticated user in your database.
     checkout_session_id = request.form.get('session_id')
