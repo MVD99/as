@@ -9,9 +9,13 @@
 <title>Liderança</title>
 
     <style>
+      .nav-item{
+        padding:10px;
+      }
       .navbar {
         --bs-navbar-padding-y: 0.5rem;
         }
+      
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -94,7 +98,7 @@
     
     <header>
       <nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-sm">
-      <div class="container">
+      <div class="container" style="height: 3.5rem;">
             <a href="#" class="navbar-brand d-flex align-items-center">
               <strong class="text2" style="font-size:30px">FormsUa</strong>
             </a>
@@ -170,6 +174,9 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="https://localhost:44374" target="_blank">Chat</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#class-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Classificação</button>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
@@ -309,6 +316,15 @@
           numa escala de 0 a 20 valores. 
           A conclusão da formação com aproveitamento resulta na obtenção de um Certificado de Formação Profissional, 
           emitido de acordo com os requisitos legais em vigor, que será disponibilizado na área do e-aluno no site da FormsUA até um prazo máximo de 15 dias após a conclusão da ação de formação.
+      </pre>
+    </div>
+    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+      <pre>
+        <b>Classificação</b>
+        Introduza no campo abaixo o valor de 0 a 10 que considera que avalia corretamente a formação.
+        Tenha em consideração a capacidade do formador de transmitir conhecimento e a capacidade de avaliação do mesmo.
+        <input type="text" id="class" name="class" value="">
+        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#class" style="margin-top: 5px;">Submeter</button>
       </pre>
     </div>
   </div>
