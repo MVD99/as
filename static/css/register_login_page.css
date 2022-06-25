@@ -149,7 +149,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    background: url(../static/imagens/background.jpg);
+    background: url(../imagens/background.jpg);
     background-size: cover;
 }
 

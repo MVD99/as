@@ -211,6 +211,13 @@
             width: fit-content;
             text-align: auto;
         }
+        .pesquisa {
+            display: inline;
+            float: none;
+            width: 40%;
+            top: 20%;
+            position: relative;
+        }
     </style>
     <script>
         function openPopoutChat() {
@@ -282,14 +289,10 @@
                 <div class="justify-content-end" id="myNavbar">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <form action="formando.html">
-                                <button class="btn btn-danger button" type="submit">Minhas formações</button>
-                            </form>
+                            <a class="btn btn-danger button" href="http://127.0.0.1:5500/as/html/formando.html">Minhas formações</a>
                         </li>
                         <li class="nav-item">
-                            <form action="conta.html">
-                                <button class="btn btn-danger button" type="submit">Minha conta</button>
-                            </form>
+                            <a class="btn btn-danger button" href="http://127.0.0.1:5500/as/html/formando.html">Minha conta</a>
                         </li>
                         <li class="nav-item">
                             <form action="index.html">
@@ -348,16 +351,19 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Avaliação</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#class-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Classificação</button>
+            </li>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                 <pre>
-                    <b>Objetivos: </b>
-                        <b>Gerais:</b>
+                <b>Objetivos: </b>
+                <b>Gerais:</b>
                             Dotar os formandos de conhecimentos sobre o conceito de Liderança, compreendendo a Liderança Situacional e que tem aos seu dispor diversos estilos de liderança,
                             bem como as competências críticas de um Líder de sucesso e como pode potenciar a performance da sua equipa.
           
-                        <b>Específicos:</b>
+                <b>Específicos:</b>
                             Concluída a ação de formação, os e-alunos deverão ser capazes de:
                                 - Compreender o conceito de Liderança e aplicação em contextos diversos;
                                 - Identificar diferentes estilos de Liderança;
@@ -366,21 +372,21 @@
                                 - Definir o plano de ação para aumentar o seu sucesso profissional.
 
 
-                    <b>Programa</b>
-                        <b>1. Caracterizar a Liderança e o seu contexto</b>
+                <b>Programa</b>
+                <b>1. Caracterizar a Liderança e o seu contexto</b>
                             1.1 Conceito de Liderança
                             1.2 Liderança Situacional
                             1.3 Estilos de Liderança
 
-                        <b>2. Competências críticas de Liderança</b>
+                <b>2. Competências críticas de Liderança</b>
                             2.1 Roda da Vida aplicada à Liderança
                             2.2 Competências críticas de Liderança
 
-                        <b>3. Desenvolvimento de Pessoas</b>
+                <b>3. Desenvolvimento de Pessoas</b>
                             3.1 O conceito de Motivação
                             3.2 Estratégias para aumentar o sucesso da equipa
 
-                        <b>4. O meu plano de Ação</b>
+                <b>4. O meu plano de Ação</b>
                             4.1 Definição de metas
                             4.2 Plano de ação para um líder de sucesso
                 </pre>
@@ -420,13 +426,13 @@
                         <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
                             <div class="card-body">
                                 <pre>
-                                    <b>Data: </b>dd/mm/aa
+                                <b>Data: </b>dd/mm/aa
 
-                                    <b>Conteúdos: </b>
+                                <b>Conteúdos: </b>
                                         Liderança Situacional
                                         Estilos de Liderança
 
-                                    <b>Tarefa:</b>
+                                <b>Tarefa:</b>
                                         - Nenhuma.
                                 </pre>
                             </div>
@@ -441,13 +447,13 @@
                         <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
                             <div class="card-body">
                                 <pre>
-                                    <b>Data: </b>dd/mm/aa
+                                <b>Data: </b>dd/mm/aa
 
-                                    <b>Conteúdos: </b>
+                                <b>Conteúdos: </b>
                                         Roda da Vida aplicada à Liderança
                                         Competências críticas de Liderança
                   
-                                    <b>Tarefa:</b>
+                                <b>Tarefa:</b>
                                         - Nenhuma.
                                 </pre>
                             </div>
@@ -462,15 +468,15 @@
                         <div id="collapseFour" class="collapse" data-bs-parent="#accordion">
                             <div class="card-body">
                                 <pre>
-                                    <b>Data: </b>dd/mm/aa
+                                <b>Data: </b>dd/mm/aa
 
-                                    <b>Conteúdos: </b>
+                                <b>Conteúdos: </b>
                                         O conceito de Motivação
                   
-                                    <b>Tarefa:</b>
+                                <b>Tarefa:</b>
                                         - Breve apresentação sobre o conceito de motivação.
-                                    <b>Submissão:</b>
-                                    <input type="file" title="Arraste para aqui" />
+                                <b>Submissão:</b>
+                                <input type="file" title="Arraste para aqui" />
                                 </pre>
                             </div>
                         </div>
@@ -488,6 +494,16 @@
                     numa escala de 0 a 20 valores. 
                         A conclusão da formação com aproveitamento resulta na obtenção de um Certificado de Formação Profissional, 
                     emitido de acordo com os requisitos legais em vigor, que será disponibilizado na área do e-aluno no site da FormsUA até um prazo máximo de 15 dias após a conclusão da ação de formação.
+                </pre>
+            </div>
+            <div class="tab-pane fade" id="class-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <pre>
+                    <b>Classificação</b>
+                        Introduza no campo abaixo o valor de 0 a 10 que considera que avalia corretamente a formação.
+                        Tenha em consideração a capacidade do formador de transmitir conhecimento e a capacidade de avaliação do mesmo.
+                    <input type="text" id="class" name="class" value="">
+                    <input class ="pesquisa" type="text" placeholder="Comentário (Opcional)">
+                    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#class" style="margin-top: 5px;">Submeter</button>
                 </pre>
             </div>
         </div>
